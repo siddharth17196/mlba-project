@@ -10,7 +10,7 @@ from sklearn.metrics import accuracy_score, roc_auc_score, matthews_corrcoef, re
 from sklearn.model_selection import cross_validate
 from sklearn.model_selection import cross_val_score
 
-with open("./features/nc_10_data.pkl", "rb") as fil:
+with open("../features/nc_10_data.pkl", "rb") as fil:
     data = pickle.load(fil)
 
 def metrics(y, preds, pred=None):
