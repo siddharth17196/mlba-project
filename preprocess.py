@@ -35,17 +35,29 @@ def dpc(a):
             l[dipep_seq[a[i]+a[j]]] += 1
             i+=1
             j+=1
-    # l = l/total_dipeptides
     l = [float(i)/total_dipeptides for i in l]
     return l
+
+def c_term(a, length):
+    l=[0]*length
+    for i in range(min(length, len(a))):
+        l[length-i-1] = seq[a[len(a)-1-i]]
+    return l
+
+def n_term(a, length):
+    l=[0]*length
+    for i in range(min(length, len(a))):
+        l[i] = seq[a[i]]
+    return l
+
 
 features = []
 for i in tqdm(range(len(data['sequence']))):
     f1 = aac(data['sequence'][i])
     f2 = dpc(data['sequence'][i])
-    f = f1 + f2
+    f = f2
     f.append(data['label'][i])
     features.append(f)
 
-with open("data.pkl", "wb") as fil:
+with open("dpc_data.pkl", "wb") as fil:
     pickle.dump(features, fil)
